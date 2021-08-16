@@ -1,0 +1,29 @@
+./"This is a manpage for the simple_shell
+.TH simple_shell 3 "16 August 2021" "V1.0" "simple_shell manpage"
+.SH NAME
+	simple_shell
+
+.SH SYNOPSIS
+	
+.SH DESCRIPTION
+	
+
+
+
+.SH
+RETURN VALUE
+
+
+.SH
+CONFORMING TO
+	simple_shell: C89, C99.
+.SH
+EXAMPLE
+	
+.SH
+BUGS
+	
+.SH
+AUTHOR(s)
+	Amos Njagi Ndungo - amosndungo@gmail.com
+	Miheret Tadesse - mihherettad2007@gmail.com
