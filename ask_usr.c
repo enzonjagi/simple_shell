@@ -1,6 +1,26 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stddef.h>
+#include <string.h>
+/**
+ * split - breaks the string into pieces and prints each
+ * @str: string pointer we'll receive
+ * Return: void but should be 0 for sucess, -1 for failure
+ */
+
+void split(char *str)
+{
+	char *piece = NULL;
+
+	piece = strtok(str, " ");/*point to string to split*/
+	while (piece != NULL)
+	{
+		printf("%s\n", piece);
+		/*keep pointing to same string*/
+		piece = strtok(NULL, " ");
+	}
+
+}
 /**
  * main - prints user input on next line
  * Return: 0
@@ -23,12 +43,13 @@ int main(void)
 		get = getline(string_ptr, &size, stdin);
 		if (get == -1)/*check for EOF*/
 			t = 0;/*change flag to 0, hence end loop*/
-		while (usrIn[0] == '\n')
+		while (usrIn[0] == '\n')/*if empty line ask again*/
 		{
 			printf("$ ");
 			getline(string_ptr, &size, stdin);
 		}
 		printf("%s", usrIn);
+		split(usrIn);
 	}
 	free(usrIn);
 	return (0);
