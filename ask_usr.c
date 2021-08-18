@@ -48,7 +48,9 @@ int main(void)
 			printf("$ ");
 			getline(string_ptr, &size, stdin);
 		}
+		printf("Print on one line:\n");
 		printf("%s", usrIn);
+		printf("Split string and print:\n");
 		split(usrIn);
 	}
 	free(usrIn);
