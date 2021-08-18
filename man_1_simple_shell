@@ -1,7 +1,7 @@
 ./"This is a manpage for the simple_shell
 .TH simple_shell 3 "16 August 2021" "V1.0" "simple_shell manpage"
 .SH NAME
-	simple_shell
+	simple_shell - a personalized shell environment
 
 .SH SYNOPSIS
 	
