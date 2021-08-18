@@ -30,19 +30,22 @@ int main(void)
 {
 	char *usrIn;/*Input*/
 	size_t size = 100;/*Expected size of input*/
-	int t = 1, get;/*Number of lines of input*/
+	int flag = 1, get;/*Flag to close or keep shell open*/
 	char **string_ptr = NULL;/*Output*/
 
 	usrIn = (char *) malloc(size);
 	if (usrIn == NULL)
 		return (free(usrIn), -1);
 	string_ptr = &usrIn;
-	while (t)
+	while (flag)
 	{
 		printf("$ ");
 		get = getline(string_ptr, &size, stdin);
 		if (get == -1)/*check for EOF*/
-			t = 0;/*change flag to 0, hence end loop*/
+		{
+			flag = 0;/*change flag to 0, hence end loop*/
+			return (-1);
+		}
 		while (usrIn[0] == '\n')/*if empty line ask again*/
 		{
 			printf("$ ");
