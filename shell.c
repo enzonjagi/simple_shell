@@ -1,7 +1,4 @@
-#include <stdio.h>
 #include "stuff.h"
-#include <stdlib.h>
-
 /**
  * main - calls the necessary functions for the shell
  * @argc: argument counter
@@ -22,7 +19,7 @@ int main(int argc, char **argv)
 void shell_loop(void)
 {
 	char *usrIn;
-	/*char **args;*/
+	char **args;
 	int flag = 1;
 
 	while (flag)
@@ -33,6 +30,10 @@ void shell_loop(void)
 		{
 			flag = 0;
 		}
+		args = split(usrIn);
+
+		free(usrIn);
+		free(args);
 	}
 }
 /**
@@ -64,4 +65,45 @@ char *read_line(void)
 	}
 
 	return (string_ptr);/*return the input read from the terminal*/
+}
+/**
+ * split - breaks the string into pieces and prints each
+ * @str: string pointer we'll receive
+ * Return: void but should be 0 for sucess, -1 for failure
+ */
+
+char **split(char *str)
+{
+	int bufsize = TOK_BUFSIZE, pos = 0;
+	char **pieces = malloc(bufsize * (sizeof (char *)));
+	char *piece;
+
+	if (!pieces)
+	{
+		fprintf(stderr, "Malloc error\n");
+		exit(EXIT_FAILURE);
+	}
+
+	piece = strtok(str, TOK_DELIM);/*point to string to split*/
+	while (piece != NULL)
+	{
+		pieces[pos] = piece;/*add token to list of tokens*/
+		pos++;
+
+		if (pos >= bufsize)
+		{
+			bufsize += TOK_BUFSIZE;
+			pieces = realloc(pieces, bufsize * sizeof(char *));
+			if (!pieces)
+			{
+				fprintf(stderr, "Malloc error\n");
+				exit(EXIT_FAILURE);
+			}
+		}
+		printf("%s\n", piece);
+		piece = strtok(NULL, TOK_DELIM);/*keep pointing to same string*/
+	}
+	pieces[pos] = NULL;
+	return (pieces);
+
 }
