@@ -7,34 +7,23 @@
  */
 int main(int argc, char **argv)
 {
-	/*initiate the shell loop*/
-	shell_loop();
-
-	return (0);
-}
-/**
- * shell_loop - loop till EOF condition is met
- * Return: void
- */
-void shell_loop(void)
-{
+/*initiate the shell loop*/
 	char *usrIn;
 	char **args;
-	int flag = 1;
+/*int flag = 1;*/
+	int status;
 
-	while (flag)
-	{
+	do {
 		printf("$ ");
 		usrIn = read_line();
-		if (usrIn == NULL)
-		{
-			flag = 0;
-		}
 		args = split(usrIn);
+		status = exec_func(args);
 
 		free(usrIn);
 		free(args);
-	}
+	} while (status);
+
+	return (0);
 }
 /**
  * read_line - gets the input from the shell
@@ -75,7 +64,7 @@ char *read_line(void)
 char **split(char *str)
 {
 	int bufsize = TOK_BUFSIZE, pos = 0;
-	char **pieces = malloc(bufsize * (sizeof (char *)));
+	char **pieces = malloc(bufsize * (sizeof(char *)));
 	char *piece;
 
 	if (!pieces)
@@ -100,10 +89,69 @@ char **split(char *str)
 				exit(EXIT_FAILURE);
 			}
 		}
-		printf("%s\n", piece);
 		piece = strtok(NULL, TOK_DELIM);/*keep pointing to same string*/
 	}
 	pieces[pos] = NULL;
 	return (pieces);
 
+}
+
+/**
+ * launch_sh - runs the fork and exec functions to run multiple
+ * programs via the shell
+ * @args: pointer for arguments to be executed
+ * Return: exit or 1 for success
+ */
+
+int launch_sh(char **args)
+{
+	pid_t pid;
+	int status;
+
+	pid = fork();
+	if (pid == 0)/*check for child process*/
+	{
+		/*run an exec to run a program on the child process*/
+		if (execve(args[0], args, NULL) == -1)
+		{
+			perror("Invalid command");
+		}
+		exit(EXIT_FAILURE);
+	}
+	else if (pid < 0)
+	{
+		perror("Fork failure");
+	}
+	else /*for parent process, wait for child to complete*/
+	{
+		do {
+			waitpid(pid, &status, WUNTRACED);
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
+	}
+
+	return (1);
+}
+/**
+ * exec_func - executes the shell
+ * @args: the arguments received
+ * Return: 1 or shell launch
+ */
+
+int exec_func(char **args)
+{
+	/*int i;*/
+
+	if (args[0] == NULL)
+		return (1);
+
+	/*
+	 *for (i = 0; i < num_builtins(); i++)
+	 *{
+	 *	if (strcmp(args[0], builtin_str[i]) == 0)
+	 *	{
+	 *		return ((*builtin_func[i])(args));
+	 *	}
+	 *}
+	 */
+	return (launch_sh(args));
 }
