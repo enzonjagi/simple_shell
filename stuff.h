@@ -13,4 +13,9 @@ char *read_line(void);
 char **split(char *str);
 int launch_sh(char **args);
 int exec_func(char **args);
+int exit_func(char **args);
+int help_func(char **args);
+int cd_func(char **args);
+int num_builtins(void);
+
 #endif /*_STUFF_H*/

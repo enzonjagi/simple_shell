@@ -1,4 +1,5 @@
 #include "stuff.h"
+
 /**
  * main - calls the necessary functions for the shell
  * @argc: argument counter
@@ -139,19 +140,27 @@ int launch_sh(char **args)
 
 int exec_func(char **args)
 {
-	/*int i;*/
+	int i;
+	char *builtin_str[] = {
+		"cd",
+		"help",
+		"exit"
+	};
+	int (*builtin_func[]) (char **) = {
+		&cd_func,
+		&help_func,
+		&exit_func
+	};
 
 	if (args[0] == NULL)
 		return (1);
 
-	/*
-	 *for (i = 0; i < num_builtins(); i++)
-	 *{
-	 *	if (strcmp(args[0], builtin_str[i]) == 0)
-	 *	{
-	 *		return ((*builtin_func[i])(args));
-	 *	}
-	 *}
-	 */
+	for (i = 0; i < num_builtins(); i++)
+	{
+		if (strcmp(args[0], builtin_str[i]) == 0)
+		{
+			return ((*builtin_func[i])(args));
+		}
+	}
 	return (launch_sh(args));
 }
