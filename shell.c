@@ -115,7 +115,7 @@ int launch_sh(char **args)
 		/*run an exec to run a program on the child process*/
 		if (execve(args[0], args, NULL) == -1)
 		{
-			perror("Invalid command");
+			perror("./shell");
 		}
 		exit(EXIT_FAILURE);
 	}
