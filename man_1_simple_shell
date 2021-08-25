@@ -3,13 +3,16 @@
 .SH NAME
 	simple_shell - a personalized shell environment
 .SH SYNOPSIS
-.B ./shellTest	
+.B ./shellTest
 .SH DESCRIPTION
-This program is a simple shell that has been made by the Holberton guidelines. It contains basic features and functions found in other shell programs.
-The first program Displays a prompt and wait for the user to type a command. the command line ends with a new line,
+This program is a simple shell that has been made by the Holberton guidelines.
+It contains basic features and functions found in other shell programs.
+The first program Displays a prompt and wait for the user to type a command. the
+command line ends with a new line,
 The prompt is displayed again each time a command has been executed,
 The command lines are simple,
-If an executable cannot be found, the program prints an error message and display the prompt again,
+If an executable cannot be found, the program prints an error message and
+display the prompt again,
 And finally the “end of file” condition (Ctrl+D) is handeled  in the program.
 .SH
 RETURN VALUE
@@ -21,7 +24,7 @@ CONFORMING TO
 .SH
 EXAMPLE
 $ ls -l
-.B ./shellTest	
+.B ./shellTest
 .SH
 BUGS
 .SH

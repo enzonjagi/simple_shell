@@ -11,15 +11,14 @@ int main(int argc, char **argv)
 /*initiate the shell loop*/
 	char *usrIn;
 	char **args;
-/*int flag = 1;*/
-	int status;
+	int status;/*controls the closing or opening of the shell*/
 
 	do {
-		printf("$ ");
-		usrIn = read_line();
-		args = split(usrIn);
-		status = exec_func(args);
-
+		printf("MnA$ ");/*print the shell dollar sign*/
+		usrIn = read_line();/*calling function for user input*/
+		args = split(usrIn);/*split input into arguments with strok*/
+		status = exec_func(args);/*calling execve on child processes*/
+		/*memory management*/
 		free(usrIn);
 		free(args);
 	} while (status);
@@ -57,7 +56,7 @@ char *read_line(void)
 	return (string_ptr);/*return the input read from the terminal*/
 }
 /**
- * split - breaks the string into pieces and prints each
+ * split - breaks the string into tokens for execution
  * @str: string pointer we'll receive
  * Return: void but should be 0 for sucess, -1 for failure
  */
@@ -68,7 +67,7 @@ char **split(char *str)
 	char **pieces = malloc(bufsize * (sizeof(char *)));
 	char *piece;
 
-	if (!pieces)
+	if (!pieces)/*malloc error check*/
 	{
 		fprintf(stderr, "Malloc error\n");
 		exit(EXIT_FAILURE);
@@ -80,6 +79,7 @@ char **split(char *str)
 		pieces[pos] = piece;/*add token to list of tokens*/
 		pos++;
 
+		/*check if pos>bufsize and reallocate mem*/
 		if (pos >= bufsize)
 		{
 			bufsize += TOK_BUFSIZE;
@@ -126,7 +126,7 @@ int launch_sh(char **args)
 	else /*for parent process, wait for child to complete*/
 	{
 		do {
-			waitpid(pid, &status, WUNTRACED);
+			waitpid(pid, &status, WUNTRACED);/*check for these*/
 		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 	}
 
