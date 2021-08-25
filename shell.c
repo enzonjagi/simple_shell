@@ -144,12 +144,14 @@ int exec_func(char **args)
 	char *builtin_str[] = {
 		"cd",
 		"help",
-		"exit"
+		"exit",
+		"env"
 	};
 	int (*builtin_func[]) (char **) = {
 		&cd_func,
 		&help_func,
-		&exit_func
+		&exit_func,
+		&env_func
 	};
 
 	if (args[0] == NULL)

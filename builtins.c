@@ -7,13 +7,15 @@ int exec_func(char **args);
 char *builtin_str[] = {
 	"cd",
 	"help",
-	"exit"
+	"exit",
+	"env"
 };
 
 int (*builtin_func[]) (char **) = {
 	&cd_func,
 	&help_func,
-	&exit_func
+	&exit_func,
+	&env_func
 };
 
 /**
@@ -74,4 +76,15 @@ int help_func(char **args)
 int exit_func(char **args)
 {
 	return (0);
+}
+/**
+ * env_func - should print the environment variables
+ * @args: pointer to the string
+ *Return: 1
+ */
+int env_func(char **args)
+{
+	system("/bin/printenv");
+
+	return (1);
 }

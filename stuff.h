@@ -17,5 +17,6 @@ int exit_func(char **args);
 int help_func(char **args);
 int cd_func(char **args);
 int num_builtins(void);
+int env_func(char **args);
 
 #endif /*_STUFF_H*/
