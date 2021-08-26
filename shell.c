@@ -8,12 +8,12 @@
  */
 int main(int argc, char **argv)
 {
-	(void) argc;
-	(void) argv;
-/*initiate the shell loop*/
 	char *usrIn;
 	char **args;
 	int status;/*controls the closing or opening of the shell*/
+
+	(void) argc;
+	(void) argv;
 
 	do {
 		printf("MnA$ ");/*print the shell dollar sign*/
