@@ -8,6 +8,8 @@
  */
 int main(int argc, char **argv)
 {
+	(void) argc;
+	(void) argv;
 /*initiate the shell loop*/
 	char *usrIn;
 	char **args;

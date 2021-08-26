@@ -36,6 +36,7 @@ int num_builtins(void)
 
 int cd_func(char **args)
 {
+	(void) args;
 	if (args[1] == NULL)
 		fprintf(stderr, "Provide arguments");
 	else
@@ -54,6 +55,7 @@ int cd_func(char **args)
 int help_func(char **args)
 {
 	int i;
+	(void) args;
 
 	printf("Simple shell by Amos and Miheret\n");
 	printf("Usage: <command> <arguments>\n");
@@ -84,6 +86,8 @@ int exit_func(char **args)
  */
 int env_func(char **args)
 {
+	(void) args;
+
 	system("/bin/printenv");
 
 	return (1);
