@@ -77,6 +77,8 @@ int help_func(char **args)
  */
 int exit_func(char **args)
 {
+	(void) args;
+
 	return (0);
 }
 /**
