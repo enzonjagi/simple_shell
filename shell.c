@@ -18,7 +18,9 @@ int main(int argc, char **argv)
 	do {
 		printf("MnA$ ");/*print the shell dollar sign*/
 		usrIn = read_line();/*calling function for user input*/
-		args = split(usrIn);/*split input into arguments with strok*/
+		args = split(usrIn);
+/*split input into arguments with strok*/
+
 		status = exec_func(args);/*calling execve on child processes*/
 		/*memory management*/
 		free(usrIn);
@@ -69,16 +71,18 @@ char **split(char *str)
 	char **pieces = malloc(bufsize * (sizeof(char *)));
 	char *piece;
 
-	if (!pieces)/*malloc error check*/
+
+	if (!pieces)
 	{
 		fprintf(stderr, "Malloc error\n");
 		exit(EXIT_FAILURE);
 	}
 
 	piece = strtok(str, TOK_DELIM);/*point to string to split*/
+
 	while (piece != NULL)
 	{
-		pieces[pos] = piece;/*add token to list of tokens*/
+		pieces[pos] = piece;
 		pos++;
 
 		/*check if pos>bufsize and reallocate mem*/
@@ -92,9 +96,10 @@ char **split(char *str)
 				exit(EXIT_FAILURE);
 			}
 		}
-		piece = strtok(NULL, TOK_DELIM);/*keep pointing to same string*/
+		piece = strtok(NULL, TOK_DELIM);
 	}
 	pieces[pos] = NULL;
+
 	return (pieces);
 
 }
